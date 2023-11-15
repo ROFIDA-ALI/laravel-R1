@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ExampleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -132,3 +132,20 @@ Route::get ('Logistics', function (){
 });
 });
 });
+
+// Route::fallback(function() {
+//     return redirect('/');
+//     });
+Route::get('cv', function () {
+    return view('cv');
+});
+Route::get('login', function () {
+    return view('login');
+});
+
+Route::post('receive', function () {
+    return 'data received';
+})->name('receive');
+
+Route::get('test1', [ExampleController::class, 
+'test1']);
