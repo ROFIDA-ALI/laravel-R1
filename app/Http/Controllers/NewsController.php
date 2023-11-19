@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Car ;
-class Carcontroller extends Controller
+use App\Models\News ;
+
+class NewsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,30 +20,30 @@ class Carcontroller extends Controller
      */
     public function create()
     {
-        return view('addCar');  //blade name
-    }
+        return view('news');  
+      }
 
     /**
      * Store a newly created resource in storage.
      */
-   
     public function store(Request $request)
     {
-        $cars = new car;
-        $cars->carTitle = $request->carTitle;
-        $cars->description = $request->description;
+        $news = new news;
+        $news->title = $request->title;
+        $news->content = $request->content;
+        $news->author = $request->author;
         $published = $request->published;
         if(isset($request->published)){
-            $cars->published = true;
+            $news->published = true;
         }else{
-            $cars->published = false;
+            $news->published = false;
         }
         
-        $cars->save();
-        return " cars data";
+        $news->save();
+        return " news data added";
     }
 
-    /** 
+    /**
      * Display the specified resource.
      */
     public function show(string $id)
