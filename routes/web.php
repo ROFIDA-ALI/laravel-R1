@@ -136,16 +136,29 @@ Route::get ('Logistics', function (){
 // Route::fallback(function() {
 //     return redirect('/');
 //     });
-Route::get('cv', function () {
-    return view('cv');
-});
-Route::get('login', function () {
-    return view('login');
+// Route::get('cv', function () {
+//     return view('cv');
+// });
+// Route::get('login', function () {
+//     return view('login');
+// });
+
+// Route::post('receive', function () {
+//     return 'data received';
+// })->name('receive');
+
+// Route::get('test1', [ExampleController::class, 
+// 'test1']);
+
+Route::get('addCar', function () {
+    return view('addCar');
 });
 
-Route::post('receive', function () {
-    return 'data received';
-})->name('receive');
+ Route::get('test', [CarController::class, 
+'test']);
 
-Route::get('test1', [ExampleController::class, 
-'test1']);
+Route::post('cardata', function () {
+    return 'Title : BMW - 
+    Price : 100000$ -
+    Description : Car  ';
+})->name('cardata');
