@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExampleController;
-// use App\Http\Controllers\Carcontroller;
+ use App\Http\Controllers\Carcontroller;
 use App\Http\Controllers\NewsController;
 
 /*
@@ -159,7 +159,17 @@ Route::get ('Logistics', function (){
 
 //  Route::get('test', [Carcontroller::class, 
 // 'test']); 
-// Route::post('cardata', [Carcontroller::class,'store'])->name('cardata');
+//car
 // Route::get('addCar', [Carcontroller::class, 'create']);
-Route::get('addnews', [NewsController::class, 'create']);
+//  Route::post('cardata', [Carcontroller::class,'store'])->name('cardata');
+// Route::get('Cars', [Carcontroller::class, 'index']);
+//  Route::get('editcar/{id}', [Carcontroller::class, 'edit']);
+//  Route::put("updateCar/{id}", 
+//  [Carcontroller::class,'update'])->name('updateCar');
+//News
+ Route::get('addnews', [NewsController::class, 'create']);
 Route::post('news', [NewsController::class,'store'])->name('news');
+Route::get('posts', [NewsController::class, 'index']);
+Route::get('editpost/{id}', [NewsController::class, 'edit']);
+Route::put("updateNews/{id}", 
+[NewsController::class,'update'])->name('updateNews');

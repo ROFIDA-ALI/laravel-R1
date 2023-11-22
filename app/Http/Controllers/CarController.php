@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Models\Car ;
 class Carcontroller extends Controller
 {
@@ -11,7 +12,8 @@ class Carcontroller extends Controller
      */
     public function index()
     {
-        //
+        $cars = Car :: get(); //Car "model name"
+        return view('cars', compact ('cars')); 
     }
 
     /**
@@ -55,8 +57,8 @@ class Carcontroller extends Controller
      */
     public function edit(string $id)
     {
-        //
-    }
+        $car = Car::findOrFail($id);
+        return view('editcar', compact ('car'));     }
 
     /**
      * Update the specified resource in storage.
