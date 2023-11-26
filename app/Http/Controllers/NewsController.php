@@ -7,13 +7,15 @@ use App\Models\News ;
 
 class NewsController extends Controller
 {
+    private $columns = ['title','content','author','published'];
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $posts = news :: get(); 
-        return view('posts', compact ('posts')); 
+        return view('posts', compact ('posts'));  //posts blade file
     }
 
     /**
@@ -49,8 +51,9 @@ class NewsController extends Controller
      */
     public function show(string $id)
     {
-        //
-    }
+
+        $post = news::findOrFail($id);
+        return view('postDetails',compact('post'));    }
 
     /**
      * Show the form for editing the specified resource.
@@ -58,7 +61,7 @@ class NewsController extends Controller
     public function edit(string $id)
     {
         
-        $post = news::findOrFail($id);
+        $post = news::findOrFail($id); //
         return view('editpost', compact ('post')); 
     }
 
@@ -67,14 +70,19 @@ class NewsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
-    }
+
+        $data = $request->only($this->columns);
+        $data['published'] = isset($data['published'])? true:false;
+
+        news::where('id', $id)->update($data);
+        return 'updated';    }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
-    }
+        news :: where('id', $id)->delete();
+
+        return 'deleted';    }
 }

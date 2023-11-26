@@ -21,11 +21,14 @@
         <th>author</th>
         <th>published</th>
         <th>Edit</th>
+        <th>SHOW</th>
+
+         <th>Delete</th>
 
       </tr>
     </thead>
-    <tbody>
-        @foreach($posts as $post)
+    <tbody>      //posts in controller index
+        @foreach($posts as $post)  
 
       <tr>
         <td>{{$post->title}}</td>      
@@ -40,6 +43,11 @@
         @endif
 </td>
 <td><a href="editpost/{{$post->id}}">Edit</a></td>
+<td><a href="postDetails/{{ $post->id }}">Show</a></td>
+
+<td><a href="deletePost/{{$post->id}}">Delete</a></td>
+
+
       </tr>
       @endforeach
         </tbody>

@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 use App\Models\Car ;
 class Carcontroller extends Controller
 {
+    private $columns = [
+        'carTitle' ,'description', 'published']; //same #name in blade file 
+
+
+
     /**
      * Display a listing of the resource.
      */
@@ -49,8 +54,8 @@ class Carcontroller extends Controller
      */
     public function show(string $id)
     {
-        //
-    }
+        $car = Car::findOrFail($id);
+        return view('carDetails',compact('car'));    }
 
     /**
      * Show the form for editing the specified resource.
@@ -62,17 +67,29 @@ class Carcontroller extends Controller
 
     /**
      * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+     */ //Car model name
+    public function update(Request $request, string $id) 
     {
-        //
+    //    Car::where('id', $id)->update($request->only($this->columns));
+    //     return 'updated';
+   
+    
+
+        $data = $request->only($this->columns);
+        $data['published'] = isset($data['published'])? true:false;
+
+        Car::where('id', $id)->update($data);
+        return 'updated';
     }
+    
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        Car :: where('id', $id)->delete();
+
+        return 'deleted';
     }
 }
