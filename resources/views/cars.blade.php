@@ -19,6 +19,8 @@
         <th>title</th>
         <th>description</th>
         <th>published</th>
+        <th>image</th>
+
         <th>Edit</th>
         <th>SHOW</th>
 
@@ -39,6 +41,7 @@
 
         @endif
 </td>
+<td>{{$car->image}}</td>   
 <td><a href="editcar/{{$car->id}}">Edit</a></td>
 <td><a href="carDetails/{{ $car->id }}">Show</a></td>
 

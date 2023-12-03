@@ -10,7 +10,7 @@ class Car extends Model
 {
     use HasFactory , SoftDeletes; //  coulmns data that user  can insert or edit only
     protected $fillable = [
-        'carTitle' ,'description', 'published'];   //same #name in blade file 
+        'carTitle' ,'description', 'published', 'image'];   //same #name in blade file 
     
 
 }

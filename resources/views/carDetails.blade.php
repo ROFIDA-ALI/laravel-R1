@@ -23,7 +23,11 @@
 
   </div>
 
+  <div class="alert alert-success">
+  Car image: {{  $car->image }}
     
+  </div>
+ 
   </div>
 
 </body>

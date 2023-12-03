@@ -12,18 +12,38 @@
 
 <div class="container">
   <h2>Update Car</h2>
-  <form action="{{route('updateCar',$car->id) }}" method="post">
+  <form action="{{route('updateCar',$car->id) }}" method="post" enctype="multipart/form-data">
     @csrf
     @method('put')
     <div class="form-group">
       <label for="title">Title:</label>
-      <input type="text" class="form-control" id="carTitle" placeholder="Enter title" name="carTitle" value="{{$car->carTitle}}">
+      <input type="text" class="form-control" id="carTitle" placeholder="Enter title" name="carTitle"  
+      value="{{ old('carTitle') }}">
+      @error('carTitle')
+      <div class="alert alert-warning">
+      {{ $message }}
+@enderror
     </div>
-    
     <div class="form-group">
         <label for="description">Description:</label>
-        <textarea class="form-control" rows="5" name="description" id="description"> {{$car->description}} </textarea>
+        <textarea class="form-control" rows="5" name="description"   id="description">{{ old('description') }}</textarea>
+        @error('description')
+        <div class="alert alert-warning">
+        {{ $message }}
+
+@enderror
       </div> 
+   
+      <div class="form-group">
+            <label for="image">Image:</label>
+            <input type="file" class="form-control" id="image" name="image" value="{{ old('image') }}">
+            @error('image')
+            <div class="alert alert-warning">
+
+                {{ $message }}
+            @enderror
+        </div>
+
     <div class="checkbox">
       <label><input type="checkbox"  name="published" @checked($car->published)> Published</label>
     </div>

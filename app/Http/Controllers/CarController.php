@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse; 
 
 use App\Models\Car ;
+use App\Traits\Common;
+
 class Carcontroller extends Controller
 {
+use Common; 
     private $columns = [
         'carTitle' ,'description', 'published']; //same #name in blade file 
 
@@ -36,21 +39,42 @@ class Carcontroller extends Controller
    
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
-            'carTitle'=>'required|string',
-            'description'=>'required|string|max:100'
-        ]);
-        
-        $data = $request->only($this->columns);
-        $data['published'] = isset($data['published'])? true : false;
-       $request->validate([
-            'carTitle'=>'required|string',
-            'description'=>'required|string|max:100'
-        ]);
-        
-        Car::create($data);
-        return redirect ('Cars');
+        $messages=[ 'carTitle.required' => 'Title is required', 
+        'description.required' => 'should be text',
+        'image.required' => 'should be png,jpg,jpeg|max:2048'
 
+    ];
+
+$data =$request->validate ([
+    'carTitle'=>'required |string',
+     'description' => 'required |string',
+     'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+ ], $messages);
+ $fileName = $this->uploadFile( $request->image, 'assets/images');
+$data['image']=$fileName;
+$data['published'] = isset($request['published']); 
+Car::create($data);
+return redirect ('Cars');
+
+ 
+
+
+//Car::create($request->only($this->columns)); return 'done';
+
+        
+    //     $request->validate([
+    //         'carTitle'=>'required|string',
+    //         'description'=>'required|string|max:100'
+    //     ]);
+        
+    //     $data = $request->only($this->columns);
+    //     $data['published'] = isset($data['published'])? true : false;
+    //    $request->validate([
+    //         'carTitle'=>'required|string',
+    //         'description'=>'required|string|max:100'
+    //     ]);
+        
+       
 
         // $cars = new car;
         // $cars->carTitle = $request->carTitle;
@@ -85,18 +109,34 @@ class Carcontroller extends Controller
     /**
      * Update the specified resource in storage.
      */ //Car model name
-    public function update(Request $request, string $id) 
+    public function update(Request $request, string $id) : RedirectResponse
     {
     //    Car::where('id', $id)->update($request->only($this->columns));
     //     return 'updated';
    
+    $messages=[ 'carTitle.required' => 'Title is required', 
+    'description.required' => 'should be text',
+    'image.required' => 'should be png,jpg,jpeg|max:2048'
+];
+
+$data =$request->validate ([
+'carTitle'=>'required |string',
+ 'description' => 'required |string',
+ 'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+], $messages);
+$fileName = $this->uploadFile( $request->image, 'assets/images');
+$data['image']=$fileName;
+$data['published'] = isset($request['published']); 
+Car::where('id', $id)->update($data);
+return redirect ('Cars');
+
     
 
-        $data = $request->only($this->columns);
-        $data['published'] = isset($data['published'])? true:false;
+        // $data = $request->only($this->columns);
+        // $data['published'] = isset($data['published'])? true:false;
 
         Car::where('id', $id)->update($data);
-        return 'updated';
+        // return 'updated';
     }
     
 

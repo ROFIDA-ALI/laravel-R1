@@ -146,12 +146,10 @@ Route::get ('Logistics', function (){
 //     return view('login');
 // });
 
-// Route::post('receive', function () {
-//     return 'data received';
-// })->name('receive');
 
-// Route::get('test1', [ExampleController::class, 
-// 'test1']);
+
+Route::get('showUpload', [ExampleController::class, 'showUpload']);
+Route::post('upload', [ExampleController::class, 'upload'])->name('upload');
 
 // Route::get('cardata', function () {
 //     return view('cardata');
@@ -159,28 +157,32 @@ Route::get ('Logistics', function (){
 
 //  Route::get('test', [Carcontroller::class, 
 // 'test']); 
+
+
+
+
 //car
-// Route::get('addCar', [Carcontroller::class, 'create']);
-//  Route::post('cardata', [Carcontroller::class,'store'])->name('cardata');
-// Route::get('Cars', [Carcontroller::class, 'index']);
-//  Route::get('editcar/{id}', [Carcontroller::class, 'edit']);
-//  Route::put("updateCar/{id}", 
-//  [Carcontroller::class,'update'])->name('updateCar');
-//  Route::get('deleteCar/{id}', [Carcontroller::class, 'destroy']);
-//  Route::get('carDetails/{id}', [Carcontroller::class, 'show'])->name('carDetails');
-//  Route::get('trashed', [Carcontroller::class, 'trashed']);
-//  Route::get('restoreCar/{id}', [Carcontroller::class, 'restore']);
-//  Route::get('delete/{id}', [Carcontroller::class, 'delete']); //forsedelete
+Route::get('addCar', [Carcontroller::class, 'create']);
+ Route::post('cardata', [Carcontroller::class,'store'])->name('cardata');
+Route::get('Cars', [Carcontroller::class, 'index']);
+ Route::get('editcar/{id}', [Carcontroller::class, 'edit']);
+ Route::put("updateCar/{id}", 
+ [Carcontroller::class,'update'])->name('updateCar');
+ Route::get('deleteCar/{id}', [Carcontroller::class, 'destroy']);
+ Route::get('carDetails/{id}', [Carcontroller::class, 'show'])->name('carDetails');
+ Route::get('trashed', [Carcontroller::class, 'trashed']);
+ Route::get('restoreCar/{id}', [Carcontroller::class, 'restore']);
+ Route::get('delete/{id}', [Carcontroller::class, 'delete']); //forsedelete
 
 // //News
- Route::get('addnews', [NewsController::class, 'create']);
-Route::post('news', [NewsController::class,'store'])->name('news');
-Route::get('posts', [NewsController::class, 'index']);
-Route::get('editpost/{id}', [NewsController::class, 'edit']);
-Route::put("updateNews/{id}", 
-[NewsController::class,'update'])->name('updateNews');
-Route::get('deletePost/{id}', [NewsController::class, 'destroy']);
- Route::get('postDetails/{id}', [NewsController::class, 'show'])->name('postDetails');
- Route::get('trashedNews', [NewsController::class, 'trashed']);
- Route::get('restoreNews/{id}', [NewsController::class, 'restore']);
- Route::get('deleteNews/{id}', [NewsController::class, 'delete']); //forsedelete
+//  Route::get('addnews', [NewsController::class, 'create']);
+// Route::post('news', [NewsController::class,'store'])->name('news');
+// Route::get('posts', [NewsController::class, 'index']);
+// Route::get('editpost/{id}', [NewsController::class, 'edit']);
+// Route::put("updateNews/{id}", 
+// [NewsController::class,'update'])->name('updateNews');
+// Route::get('deletePost/{id}', [NewsController::class, 'destroy']);
+//  Route::get('postDetails/{id}', [NewsController::class, 'show'])->name('postDetails');
+//  Route::get('trashedNews', [NewsController::class, 'trashed']);
+//  Route::get('restoreNews/{id}', [NewsController::class, 'restore']);
+//  Route::get('deleteNews/{id}', [NewsController::class, 'delete']); //forsedelete
