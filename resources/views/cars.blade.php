@@ -41,7 +41,9 @@
 
         @endif
 </td>
-<td>{{$car->image}}</td>   
+<td>
+ <img src="{{ asset ('assets/images/'.$car->image)}}" width ="70px" alt="image">
+</td>   
 <td><a href="editcar/{{$car->id}}">Edit</a></td>
 <td><a href="carDetails/{{ $car->id }}">Show</a></td>
 

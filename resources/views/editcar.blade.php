@@ -36,7 +36,9 @@
    
       <div class="form-group">
             <label for="image">Image:</label>
-            <input type="text" class="form-control" id="image" name="image" value="{{ $car->image }}">
+            <input type="file" class="form-control" id="image" name="image" >
+            <img src="{{ asset ('assets/images/'.$car->image)}}" width ="70px" alt="image">
+
             @error('image')
             <div class="alert alert-warning">
 
