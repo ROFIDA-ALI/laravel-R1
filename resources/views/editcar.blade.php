@@ -18,7 +18,7 @@
     <div class="form-group">
       <label for="title">Title:</label>
       <input type="text" class="form-control" id="carTitle" placeholder="Enter title" name="carTitle"  
-      value="{{ old('carTitle') }}">
+      value="{{ $car->carTitle }}">
       @error('carTitle')
       <div class="alert alert-warning">
       {{ $message }}
@@ -26,7 +26,7 @@
     </div>
     <div class="form-group">
         <label for="description">Description:</label>
-        <textarea class="form-control" rows="5" name="description"   id="description">{{ old('description') }}</textarea>
+        <textarea class="form-control" rows="5" name="description"   id="description">{{ $car->description}}</textarea>
         @error('description')
         <div class="alert alert-warning">
         {{ $message }}
@@ -36,7 +36,7 @@
    
       <div class="form-group">
             <label for="image">Image:</label>
-            <input type="file" class="form-control" id="image" name="image" value="{{ old('image') }}">
+            <input type="file" class="form-control" id="image" name="image" value="{{ $car->image }}">
             @error('image')
             <div class="alert alert-warning">
 
