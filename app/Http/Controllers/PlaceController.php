@@ -16,7 +16,13 @@ class PlaceController extends Controller
      */
     public function index()
     {
-        $places = Place :: get();
+        // $places = DB::table('places')->latest ('id','desc')->limit(6)->get();
+        // return view('blog', compact ('places'));
+        $places = Place ::latest()
+        ->orderBY('created_at','desc')
+        ->take(6)
+        ->get();
+
         return view('blog', compact ('places')); 
     }
     
