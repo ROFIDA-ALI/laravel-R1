@@ -42,17 +42,41 @@
                 {{ $message }}
             @enderror
         </div>
-
         <div class="form-group">
-      <label for="title">Price:</label>
-      <input type="text" class="form-control" id="price" placeholder="Enter price" name="price"  
-      value="{{ old('price') }}">
-      @error('price')
+      <label for="title">Category:</label>
+      <input type="text" class="form-control" id="category" placeholder="Enter category" name="category"  
+      value="{{ old('category') }}">
+      @error('category')
       <div class="alert alert-warning">
       {{ $message }}
 @enderror
     </div>
 
+
+        <div class="form-group">
+      <label for="title">Price:</label>
+      <form>
+  <div class="form-row">
+    <div class="col">
+      <input type="text" class="form-control" id="from" name="from" placeholder="From"
+      value="{{ old('from') }}">
+      @error('from')
+      <div class="alert alert-warning">
+      {{ $message }}
+@enderror
+    </div>
+    <br>
+    <div class="form-row">
+    <div class="col">
+      <input type="text" class="form-control" id="to" name="to" placeholder="To"
+      value="{{ old('to') }}">
+      @error('to')
+      <div class="alert alert-warning">
+      {{ $message }}
+@enderror
+    </div>
+</form>
+<br>
     <button type="submit" class="btn btn-default">Add</button>
   </form>
 </div>

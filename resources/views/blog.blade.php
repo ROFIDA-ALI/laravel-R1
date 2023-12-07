@@ -42,10 +42,10 @@
 										<span class="explore-rating">5.0</span>
 										<a href="#"> 10 ratings</a> 
 										<span class="explore-price-box">
-											from
-											<span class="explore-price"><?= $place['price'] ?> </span>
+											form
+											<span class="explore-price"><?= $place['from'] ?>-<?= $place['to'] ?></span>
 										</span>
-										 <a href="#">resturent</a>
+										 <a href="#"><?= $place['category'] ?></a>
 									</p>
                                     <div class="explore-person">
 										<div class="row">

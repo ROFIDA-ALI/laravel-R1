@@ -10,7 +10,7 @@ use App\Traits\Common;
 class PlaceController extends Controller
 {
     use Common; 
-    private $columns = ['title','description','image','price'];
+    private $columns = ['title','description','image','category','from','to'];
     /**
      * Display a listing of the resource.
      */
@@ -40,7 +40,10 @@ class PlaceController extends Controller
             'title'=>'required |string',
              'description' => 'required |string',
              'image' => 'sometimes|mimes:png,jpg,jpeg|max:2048',
-             'price'=>'required |string'
+             'category'=>'required |string',
+             'from'=>'required |string',
+             'to'=>'required |string'
+
             ], $messages);
             if ($request ->hasFile('image')){
 
@@ -54,7 +57,10 @@ class PlaceController extends Controller
         return [ 'title.required' => 'Title is required', 
         'description.required' => 'should be text',
         'image.required' => 'should be png,jpg,jpeg|max:2048',
-        'price.required' => 'should be number'
+        'category.required' => 'Category is required', 
+        'from.required' => 'should be number',
+        'to.required' => 'should be number'
+
     ];
     }
 
