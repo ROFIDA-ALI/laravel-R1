@@ -39,11 +39,8 @@ use Common;
    
     public function store(Request $request): RedirectResponse
     {
-        $messages=[ 'carTitle.required' => 'Title is required', 
-        'description.required' => 'should be text',
-        'image.required' => 'should be png,jpg,jpeg|max:2048'
-
-    ];
+        $messages=$this ->messages();
+    
 
 $data =$request->validate ([
     'carTitle'=>'required |string',
@@ -114,18 +111,17 @@ return redirect ('Cars');
     //    Car::where('id', $id)->update($request->only($this->columns));
     //     return 'updated';
    
-    $messages=[ 'carTitle.required' => 'Title is required', 
-    'description.required' => 'should be text',
-    'image.required' => 'should be png,jpg,jpeg|max:2048'
-];
+    $messages=$this ->messages();
+
 
 $data =$request->validate ([
 'carTitle'=>'required |string',
  'description' => 'required |string',
- 'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+ 'image' => 'sometimes|mimes:png,jpg,jpeg|max:2048',
 ], $messages);
+if ($request ->hasFile('image')){
 $fileName = $this->uploadFile( $request->image, 'assets/images');
-$data['image']=$fileName;
+$data['image']=$fileName;}
 $data['published'] = isset($request['published']); 
 Car::where('id', $id)->update($data);
 return redirect ('Cars');
@@ -168,6 +164,11 @@ return redirect ('Cars');
         Car :: where('id', $id)->restore();
         return redirect ('Cars');
     }
-
+    public function messages(){
+        return [ 'carTitle.required' => 'Title is required', 
+        'description.required' => 'should be text',
+        'image.required' => 'should be png,jpg,jpeg|max:2048'
+    ];
+    }
 
 }

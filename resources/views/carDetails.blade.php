@@ -24,7 +24,8 @@
   </div>
 
   <div class="alert alert-success">
-  Car image: {{  $car->image }}
+  Car image:             <img src="{{ asset ('assets/images/'.$car->image)}}" width ="70px" alt="image">
+
     
   </div>
  

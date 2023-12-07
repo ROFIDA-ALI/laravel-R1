@@ -16,7 +16,17 @@ public function showUpload(){
 
 
 }
+public function place(){
+    return view("place");
 
+
+}
+
+public function blog(){
+    return view("blog");
+
+
+}
 public function upload(Request $request){
     // $file_extension = $request->image->getClientOriginalExtension();
     //     $file_name = time() . '.' . $file_extension;
