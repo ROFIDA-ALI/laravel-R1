@@ -1,5 +1,6 @@
-<!--footer start-->
-<footer id="footer"  class="footer">
+
+        <!--footer start-->
+		<footer id="footer"  class="footer">
 			<div class="container">
 				<div class="footer-menu">
 		           	<div class="row">
@@ -53,4 +54,3 @@
 			
         </footer><!--/.footer-->
 		<!--footer end-->
-		
