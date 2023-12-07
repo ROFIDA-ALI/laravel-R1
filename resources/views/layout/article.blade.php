@@ -10,7 +10,7 @@
 @include('includes.topArea')
 
 @yield('content')
-@include('includes.reviews')
+
 @include('includes.footer')
  @include('includes.footerJS')
 
