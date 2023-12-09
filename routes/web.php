@@ -17,9 +17,9 @@ use App\Http\Controllers\PlaceController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('test', function () {
     return 'welcome to my first route';
@@ -151,10 +151,13 @@ Route::get ('Logistics', function (){
 
 Route::get('showUpload', [ExampleController::class, 'showUpload']);
 Route::post('upload', [ExampleController::class, 'upload'])->name('upload');
-Route::get('place', [ExampleController::class, 'place']);
+// Route::get('place', [ExampleController::class, 'place']);
 // Route::get('blog', [ExampleController::class, 'blog']);
 //places 
-Route::get('blog', [PlaceController::class, 'index']);
+
+Route::get('place', [PlaceController::class, 'place']);
+
+Route::get('explore', [PlaceController::class, 'explore']);
 Route::get('addPlace', [PlaceController::class, 'create']);
 Route::post('placedata', [PlaceController::class,'store'])->name('placedata');
 // Route::get('cardata', function () {

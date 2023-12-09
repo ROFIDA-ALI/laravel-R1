@@ -14,7 +14,7 @@ class PlaceController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function explore()
     {
         // $places = DB::table('places')->latest ('id','desc')->limit(6)->get();
         // return view('blog', compact ('places'));
@@ -23,9 +23,15 @@ class PlaceController extends Controller
         ->take(6)
         ->get();
 
-        return view('blog', compact ('places')); 
+        return view('explore', compact ('places')); 
     }
+
+    public function place()
+    { 
+        $places = Place::get();
+        return view('place', compact ('places'));     
     
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -56,7 +62,7 @@ class PlaceController extends Controller
             $fileName = $this->uploadFile( $request->image, 'assets/images/explore');
             $data['image']=$fileName;}
             Place ::create($data);
-            return redirect ('blog');
+            return redirect ('explore');
 
     }
     public function messages(){
