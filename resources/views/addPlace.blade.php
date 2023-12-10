@@ -42,15 +42,7 @@
                 {{ $message }}
             @enderror
         </div>
-        <div class="form-group">
-      <label for="title">Category:</label>
-      <input type="text" class="form-control" id="category" placeholder="Enter category" name="category"  
-      value="{{ old('category') }}">
-      @error('category')
-      <div class="alert alert-warning">
-      {{ $message }}
-@enderror
-    </div>
+        
 
 
         <div class="form-group">

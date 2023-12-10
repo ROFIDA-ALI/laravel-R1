@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('title',100);
             $table->text('description');
             $table->string('image', 100);
-            $table->string('category',100);
             $table->string('from',100);
             $table->string('to',100);
           

@@ -11,9 +11,9 @@
 				
 
 
-	@foreach ($places as $place)  
-				
+					@foreach ($places as $place)  
 					<div class="row">
+				
 						<div class=" col-md-4 col-sm-6">
 							<div class="single-explore-item">
 								<div class="single-explore-img">
@@ -38,6 +38,7 @@
 								</div>
 								<div class="single-explore-txt bg-theme-1">
 								<h2><?= $place['title'] ?></h2>
+
 									<p class="explore-rating-price">
 										<span class="explore-rating">5.0</span>
 										<a href="#"> 10 ratings</a> 

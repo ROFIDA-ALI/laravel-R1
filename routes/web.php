@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
+
 use App\Http\Controllers\ExampleController;
  use App\Http\Controllers\Carcontroller;
 use App\Http\Controllers\NewsController;
@@ -16,6 +18,14 @@ use App\Http\Controllers\PlaceController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+// Route :: get('place',  function ()
+
+// {
+//     $places = DB::table('places')->latest ('id','desc')->limit(6)->get();
+//     return view('place', compact ('places')); 
+
+// });
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -155,10 +165,14 @@ Route::post('upload', [ExampleController::class, 'upload'])->name('upload');
 // Route::get('blog', [ExampleController::class, 'blog']);
 //places 
 
-Route::get('place', [PlaceController::class, 'place']);
-
+Route::get('places', [PlaceController::class, 'index']);   //table places
+Route::get('place', [PlaceController::class, 'place']); //home of web 
+Route::get('deletePlace/{id}', [PlaceController::class, 'destroy']);     //soft delete
+Route::get('trashedPlaces', [PlaceController::class, 'trashedPlaces']);   
+Route::get('restorePlace/{id}', [PlaceController::class, 'restorePlace']);
+Route::get('ForseDelete/{id}', [PlaceController::class, 'ForseDelete']); //forsedelete
 Route::get('explore', [PlaceController::class, 'explore']);
-Route::get('addPlace', [PlaceController::class, 'create']);
+Route::get('addPlace', [PlaceController::class, 'create']);   //add
 Route::post('placedata', [PlaceController::class,'store'])->name('placedata');
 // Route::get('cardata', function () {
 //     return view('cardata');

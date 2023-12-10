@@ -9,5 +9,5 @@ class Place extends Model
 {
     use HasFactory, SoftDeletes; 
 
-    protected $fillable = ['title','description','image','category','from','to'];
+    protected $fillable = ['title','description','image','from','to'];
 }

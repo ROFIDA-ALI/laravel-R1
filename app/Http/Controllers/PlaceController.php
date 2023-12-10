@@ -10,14 +10,21 @@ use App\Traits\Common;
 class PlaceController extends Controller
 {
     use Common; 
-    private $columns = ['title','description','image','category','from','to'];
+    private $columns = ['title','description','image','from','to'];
     /**
      * Display a listing of the resource.
      */
-    public function explore()
+    public function index() //table
     {
-        // $places = DB::table('places')->latest ('id','desc')->limit(6)->get();
-        // return view('blog', compact ('places'));
+        $places = Place :: get(); 
+        return view('places', compact ('places')); 
+    }
+
+
+
+    public function explore() 
+    {
+      
         $places = Place ::latest()
         ->orderBY('created_at','desc')
         ->take(6)
@@ -26,9 +33,12 @@ class PlaceController extends Controller
         return view('explore', compact ('places')); 
     }
 
-    public function place()
+    public function place()    // home web
     { 
-        $places = Place::get();
+        $places = Place::latest()
+        ->orderBY('created_at','desc')
+        ->take(6)
+        ->get();
         return view('place', compact ('places'));     
     
     }
@@ -52,7 +62,6 @@ class PlaceController extends Controller
             'title'=>'required |string',
              'description' => 'required |string',
              'image' => 'sometimes|mimes:png,jpg,jpeg|max:2048',
-             'category'=>'required |string',
              'from'=>'required |string',
              'to'=>'required |string'
 
@@ -62,14 +71,13 @@ class PlaceController extends Controller
             $fileName = $this->uploadFile( $request->image, 'assets/images/explore');
             $data['image']=$fileName;}
             Place ::create($data);
-            return redirect ('explore');
+            return redirect ('places');
 
     }
     public function messages(){
         return [ 'title.required' => 'Title is required', 
         'description.required' => 'should be text',
         'image.required' => 'should be png,jpg,jpeg|max:2048',
-        'category.required' => 'Category is required', 
         'from.required' => 'should be number',
         'to.required' => 'should be number'
 
@@ -103,8 +111,31 @@ class PlaceController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+    
     public function destroy(string $id)
     {
-        //
+        Place :: where('id', $id)->delete();
+
+        return redirect ('places');
+    } 
+
+    public function trashedPlaces()
+    {
+    $places = Place::onlyTrashed()->get();
+    return view('trashedPlaces', compact('places'));
     }
+
+    public function restorePlace(string $id): RedirectResponse
+    {
+        Place :: where('id', $id)->restore();
+        return redirect ('places');
+    }
+
+    public function ForseDelete(string $id): RedirectResponse
+    {
+        Place :: where('id', $id)->forceDelete();
+
+     return redirect ('trashedPlaces');   
+     }
+
 }
