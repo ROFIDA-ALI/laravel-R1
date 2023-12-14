@@ -197,7 +197,7 @@ Route::get('Cars', [Carcontroller::class, 'index']);
  Route::get('restoreCar/{id}', [Carcontroller::class, 'restore']);
  Route::get('delete/{id}', [Carcontroller::class, 'delete']); //forsedelete
 
-// //News
+// // // //News
 //  Route::get('addnews', [NewsController::class, 'create']);
 // Route::post('news', [NewsController::class,'store'])->name('news');
 // Route::get('posts', [NewsController::class, 'index']);

@@ -22,7 +22,9 @@
    Car Description: {{  $car->description }}
 
   </div>
-
+  <div class="alert alert-success">
+    Car Category: {{  $car->category->categoryName }} 
+ </div>
   <div class="alert alert-success">
   Car image:             <img src="{{ asset ('assets/images/'.$car->image)}}" width ="70px" alt="image">
 
@@ -33,3 +35,4 @@
 
 </body>
 </html>
+//category is the method in Car model belong

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse; 
 
 use App\Models\Car ;
+use App\Models\Category ;
+
 use App\Traits\Common;
 
 class Carcontroller extends Controller
@@ -22,7 +24,7 @@ use Common;
     public function index()
     {
         $cars = Car :: get(); //Car "model name"
-        return view('cars', compact ('cars')); 
+        return view('Cars', compact ('cars')); 
     }
 
     /**
@@ -30,7 +32,10 @@ use Common;
      */
     public function create()
     {
-        return view('addCar');  //blade name
+        $categories = Category ::select('id','categoryName')->get();
+        
+        return view('addCar', compact('categories'));  //blade name
+
     }
 
     /**
@@ -40,29 +45,45 @@ use Common;
     public function store(Request $request): RedirectResponse
     {
         $messages=$this ->messages();
+        $category = Category::findOrFail($request->category_id);
+        $data = $request->validate ([
+            'carTitle'=>'required |string',
+             'description' => 'required |string',
+             'image' => 'required|mimes:png,jpg,jpeg|max:2048'
+             
+         ], $messages);
+         $data = $request->only($this->columns);
+         $fileName = $this->uploadFile( $request->image, 'assets/images');
+        $data['image']=$fileName;
+        $data['category_id']=($request->category_id);
+        $data['published'] = isset($request['published']); 
+        Car::create($data);
+        return redirect('Cars');  
+          
+            
     
 
-$data =$request->validate ([
-    'carTitle'=>'required |string',
-     'description' => 'required |string',
-     'image' => 'required|mimes:png,jpg,jpeg|max:2048',
- ], $messages);
- $fileName = $this->uploadFile( $request->image, 'assets/images');
-$data['image']=$fileName;
-$data['published'] = isset($request['published']); 
-Car::create($data);
-return redirect ('Cars');
+// $data =$request->validate ([
+//     'carTitle'=>'required |string',
+//      'description' => 'required |string',
+//      'image' => 'required|mimes:png,jpg,jpeg|max:2048'
+     
+//  ], $messages);
+//  $fileName = $this->uploadFile( $request->image, 'assets/images');
+// $data['image']=$fileName;
 
- 
+// $data['published'] = isset($request['published']); 
+// Car::create($data);
+// return view('cars', compact ('cars')); 
 
 
 //Car::create($request->only($this->columns)); return 'done';
 
         
-    //     $request->validate([
-    //         'carTitle'=>'required|string',
-    //         'description'=>'required|string|max:100'
-    //     ]);
+        // $request->validate([
+        //     'carTitle'=>'required|string',
+        //     'description'=>'required|string|max:100'
+        // ]);
         
     //     $data = $request->only($this->columns);
     //     $data['published'] = isset($data['published'])? true : false;
@@ -100,19 +121,20 @@ return redirect ('Cars');
      */
     public function edit(string $id)
     {
+        $categories = Category ::select('id','categoryName')->get();
         $car = Car::findOrFail($id);
-        return view('editcar', compact ('car'));     }
+        return view('editcar', compact ('car', 'categories'));     }
 
     /**
      * Update the specified resource in storage.
      */ //Car model name
     public function update(Request $request, string $id) : RedirectResponse
     {
-    //    Car::where('id', $id)->update($request->only($this->columns));
-    //     return 'updated';
+
    
     $messages=$this ->messages();
 
+    $category = Category::findOrFail($request->category_id);
 
 $data =$request->validate ([
 'carTitle'=>'required |string',
@@ -122,10 +144,10 @@ $data =$request->validate ([
 if ($request ->hasFile('image')){
 $fileName = $this->uploadFile( $request->image, 'assets/images');
 $data['image']=$fileName;}
-$data['published'] = isset($request['published']); 
-Car::where('id', $id)->update($data);
-return redirect ('Cars');
-
+$data['category_id']=($request->category_id);
+        $data['published'] = isset($request['published']); 
+        Car::create($data);
+        return redirect('Cars');  
     
 
         // $data = $request->only($this->columns);
@@ -148,6 +170,7 @@ return redirect ('Cars');
 
     public function delete(string $id): RedirectResponse
     {
+        
      Car :: where('id', $id)->forceDelete();
 
      return redirect ('trashed');   
@@ -167,7 +190,8 @@ return redirect ('Cars');
     public function messages(){
         return [ 'carTitle.required' => 'Title is required', 
         'description.required' => 'should be text',
-        'image.required' => 'should be png,jpg,jpeg|max:2048'
+        'image.required' => 'should be png,jpg,jpeg',
+        
     ];
     }
 

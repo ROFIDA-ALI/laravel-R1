@@ -20,6 +20,7 @@
         <th>description</th>
         <th>published</th>
         <th>image</th>
+        <th>Category Name</th>
 
         <th>Edit</th>
         <th>SHOW</th>
@@ -44,6 +45,7 @@
 <td>
  <img src="{{ asset ('assets/images/'.$car->image)}}" width ="70px" alt="image">
 </td>   
+<td>{{$car->category->categoryName}}</td> 
 <td><a href="editcar/{{$car->id}}">Edit</a></td>
 <td><a href="carDetails/{{ $car->id }}">Show</a></td>
 
