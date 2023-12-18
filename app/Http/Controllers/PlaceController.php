@@ -7,6 +7,8 @@ use Illuminate\Http\RedirectResponse;
 
 use App\Models\Place;
 use App\Traits\Common;
+use App\Mail\ContactMail;
+use Mail;
 class PlaceController extends Controller
 {
     use Common; 
@@ -83,7 +85,17 @@ class PlaceController extends Controller
 
     ];
     }
+    public function contact() 
+    {
+        $places = Place :: get(); 
+        return view('contact', compact ('places')); 
+    }
 
+    public function contact_mail(Request $request) //send
+    {
+       Mail::to('rofidaali44@gmail.com')->send(new ContactMail($request));
+       return "Your message is sent Successfully";
+    }
     /**
      * Display the specified resource.
      */

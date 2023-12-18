@@ -27,9 +27,9 @@ use App\Http\Controllers\PlaceController;
 
 // });
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
 Route::get('test', function () {
     return 'welcome to my first route';
@@ -174,6 +174,9 @@ Route::get('ForseDelete/{id}', [PlaceController::class, 'ForseDelete']); //forse
 Route::get('explore', [PlaceController::class, 'explore']);
 Route::get('addPlace', [PlaceController::class, 'create']);   //add
 Route::post('placedata', [PlaceController::class,'store'])->name('placedata');
+Route::get('contact', [PlaceController::class, 'contact']);
+Route::post('contact_mail', [PlaceController::class,'contact_mail'])->name('contact_mail');
+
 // Route::get('cardata', function () {
 //     return view('cardata');
 // });
@@ -209,3 +212,7 @@ Route::get('Cars', [Carcontroller::class, 'index']);
 //  Route::get('trashedNews', [NewsController::class, 'trashed']);
 //  Route::get('restoreNews/{id}', [NewsController::class, 'restore']);
 //  Route::get('deleteNews/{id}', [NewsController::class, 'delete']); //forsedelete
+
+Auth::routes(['verify'=>true]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

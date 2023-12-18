@@ -49,8 +49,8 @@ use Common;
         $data = $request->validate ([
             'carTitle'=>'required |string',
              'description' => 'required |string',
-             'image' => 'required|mimes:png,jpg,jpeg|max:2048'
-             
+             'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+             'category_id' => 'required',
          ], $messages);
          $data = $request->only($this->columns);
          $fileName = $this->uploadFile( $request->image, 'assets/images');
@@ -134,26 +134,28 @@ use Common;
    
     $messages=$this ->messages();
 
-    $category = Category::findOrFail($request->category_id);
+    // $category = Category::findOrFail($request->category_id);
 
 $data =$request->validate ([
 'carTitle'=>'required |string',
  'description' => 'required |string',
  'image' => 'sometimes|mimes:png,jpg,jpeg|max:2048',
+ 'category_id' => 'required',
 ], $messages);
 if ($request ->hasFile('image')){
 $fileName = $this->uploadFile( $request->image, 'assets/images');
 $data['image']=$fileName;}
-$data['category_id']=($request->category_id);
+// $data['category_id']=($request->category_id);
         $data['published'] = isset($request['published']); 
-        Car::create($data);
+        // Car::create($data);
+        Car::where('id', $id)->update($data);
+
         return redirect('Cars');  
     
 
         // $data = $request->only($this->columns);
         // $data['published'] = isset($data['published'])? true:false;
 
-        Car::where('id', $id)->update($data);
         // return 'updated';
     }
     
