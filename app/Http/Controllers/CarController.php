@@ -190,9 +190,9 @@ $data['image']=$fileName;}
         return redirect ('Cars');
     }
     public function messages(){
-        return [ 'carTitle.required' => 'Title is required', 
-        'description.required' => 'should be text',
-        'image.required' => 'should be png,jpg,jpeg',
+        return [ 'carTitle.required' => __('messages.Title is required'), 
+        'description.required' =>  __('messages.should be text') ,
+        'image.required' => __('messages.should be png,jpg,jpeg'),
         
     ];
     }

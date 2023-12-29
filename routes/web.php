@@ -158,6 +158,7 @@ Route::get ('Logistics', function (){
 // });
 
 
+Route::get('session', [ExampleController::class, 'mySession']);
 
 Route::get('showUpload', [ExampleController::class, 'showUpload']);
 Route::post('upload', [ExampleController::class, 'upload'])->name('upload');
@@ -174,8 +175,18 @@ Route::get('ForseDelete/{id}', [PlaceController::class, 'ForseDelete']); //forse
 Route::get('explore', [PlaceController::class, 'explore']);
 Route::get('addPlace', [PlaceController::class, 'create']);   //add
 Route::post('placedata', [PlaceController::class,'store'])->name('placedata');
-Route::get('contact', [PlaceController::class, 'contact']);
-Route::post('contact_mail', [PlaceController::class,'contact_mail'])->name('contact_mail');
+
+
+    Route::group(
+        [
+            'prefix' => LaravelLocalization::setLocale(),
+            'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+        ], function(){ 
+            Route::get('contact', [PlaceController::class, 'contact']);
+            Route::post('contact_mail', [PlaceController::class,'contact_mail'])->name('contact_mail');
+        });
+
+
 
 // Route::get('cardata', function () {
 //     return view('cardata');
@@ -188,9 +199,7 @@ Route::post('contact_mail', [PlaceController::class,'contact_mail'])->name('cont
 
 
 //car
-Route::get('addCar', [Carcontroller::class, 'create']);
- Route::post('cardata', [Carcontroller::class,'store'])->name('cardata');
-Route::get('Cars', [Carcontroller::class, 'index']);
+ 
  Route::get('editcar/{id}', [Carcontroller::class, 'edit']);
  Route::put("updateCar/{id}", 
  [Carcontroller::class,'update'])->name('updateCar');
@@ -200,6 +209,15 @@ Route::get('Cars', [Carcontroller::class, 'index']);
  Route::get('restoreCar/{id}', [Carcontroller::class, 'restore']);
  Route::get('delete/{id}', [Carcontroller::class, 'delete']); //forsedelete
 
+ Route::group(
+    [
+        'prefix' => LaravelLocalization::setLocale(),
+        'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]
+    ], function(){ 
+        Route::get('addCar', [Carcontroller::class, 'create']);
+        Route::post('cardata', [Carcontroller::class,'store'])->name('cardata');
+        Route::get('Cars', [Carcontroller::class, 'index'])->middleware('verified');
+    });
 // // // //News
 //  Route::get('addnews', [NewsController::class, 'create']);
 // Route::post('news', [NewsController::class,'store'])->name('news');
@@ -216,3 +234,4 @@ Route::get('Cars', [Carcontroller::class, 'index']);
 Auth::routes(['verify'=>true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+

@@ -3,6 +3,11 @@
 <!--subscription strat -->
 <section id="contact"  class="subscription">
     <div class="container">
+    <div>
+        <a href="{{ LaravelLocalization::getLocalizedURL('en') }}">English</a>
+        <a href="{{ LaravelLocalization::getLocalizedURL('ar') }}">Arabic</a>
+    </div>
+        <h2 class="text-center">{{ __('messages.contactForm') }}</h2>
         <form action="{{ route('contact_mail') }}" method="post" enctype="multipart/form-data">
             @csrf
         <div class="subscribe-title text-center">
